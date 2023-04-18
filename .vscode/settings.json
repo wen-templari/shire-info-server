@@ -1,0 +1,30 @@
+{
+  "cSpell.words": [
+    "ACAD",
+    "appenders",
+    "CDPA",
+    "consoleout",
+    "datatsource",
+    "fileout",
+    "Millis",
+    "samaccount",
+    "samaccountname"
+  ],
+  "sqltools.connections": [
+    {
+      "mssqlOptions": {
+        "appName": "SQLTools",
+        "useUTC": true,
+        "encrypt": true
+      },
+      "previewLimit": 50,
+      "server": "SGPVM172.apac.bosch.com",
+      "port": 1433,
+      "driver": "MSSQL",
+      "name": "dev",
+      "database": "DB_SF360_Star_SQL",
+      "username": "developer",
+      "password": "1234567890"
+    }
+  ]
+}

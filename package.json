@@ -1,0 +1,51 @@
+{
+  "name": "koa-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch": "tsc -w --outDir dist",
+    "build": "del /s /q dist&& tsc --outDir dist",
+    "start": "set NODE_ENV=development&& npm run build && node dist/app.js",
+    "test": "npm run build && mocha ./dist/test/test.js",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.2",
+    "https": "^1.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "koa": "^2.13.4",
+    "koa-body": "^5.0.0",
+    "koa-router": "^12.0.0",
+    "log4js": "^6.6.1",
+    "mime-types": "^2.1.35",
+    "minio": "^7.0.32",
+    "mssql": "^7.3.5",
+    "node-xlsx": "^0.21.0",
+    "qs": "^6.11.0",
+    "redis": "^4.3.1",
+    "reflect-metadata": "^0.1.13",
+    "superstruct": "^0.16.0",
+    "typeorm": "^0.3.7"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^8.5.8",
+    "@types/koa": "^2.13.4",
+    "@types/koa-router": "^7.4.4",
+    "@types/mime-types": "^2.1.1",
+    "@types/minio": "^7.0.13",
+    "@types/mssql": "^8.1.1",
+    "@types/node": "^17.0.23",
+    "@typescript-eslint/eslint-plugin": "^5.13.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "typescript": "^4.6.3"
+  }
+}

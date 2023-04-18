@@ -1,0 +1,43 @@
+{
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "rules": {
+        "no-multiple-empty-lines": "error",
+        "keyword-spacing": [
+            "error",
+            {
+                "before": true
+            }
+        ],
+        "key-spacing": [
+            "error",
+            {
+                "beforeColon": false,
+                "afterColon": true
+            }
+        ],
+        "no-multi-spaces": "error",
+        "indent": [
+            "error",
+            2,
+            {
+                "ignoredNodes": [
+                    "PropertyDefinition"
+                ]
+            }
+        ],
+        "quotes": [
+            "error",
+            "double"
+        ],
+        "semi": [
+            "error",
+            "never"
+        ],
+        "prefer-const": [
+            "error"
+        ]
+    }
+}

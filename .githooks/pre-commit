@@ -1,0 +1,4 @@
+#!/bin/sh
+
+echo "hook running"
+npm run lint
