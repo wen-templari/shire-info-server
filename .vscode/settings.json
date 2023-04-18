@@ -8,7 +8,8 @@
     "fileout",
     "Millis",
     "samaccount",
-    "samaccountname"
+    "samaccountname",
+    "typeorm"
   ],
   "sqltools.connections": [
     {
