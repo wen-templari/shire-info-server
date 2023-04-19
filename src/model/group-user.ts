@@ -7,10 +7,17 @@ export class GroupUser {
   @PrimaryGeneratedColumn()
   public postToCategoryId: number
 
-  @Column()
+  @Column({
+    nullable: true
+  })
   userPort?: number
 
-  @ManyToOne(() => User, user => user.userGroups)
+  @Column()
+  userId:number
+
+  @ManyToOne(() => User, user => user.userGroups,{
+    eager: true
+  })
   user: User
 
   @ManyToOne(() => Group, group => group.groupUsers)

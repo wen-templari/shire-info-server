@@ -8,13 +8,32 @@ const GroupUserRepo = AppDataSource.getRepository(GroupUser)
 
 const GroupRouter = {
   async create(ctx: ParameterizedContext) {
-    // TODO not implemented
+    const req = ctx.request.body as {
+      userId:number
+    }[]
+    const groupUsers = req.map(userId=>{
+      return GroupUserRepo.create(userId)
+    }) 
+    const group = await GroupRepo.save({
+      groupUsers: groupUsers
+    })
+    ctx.body = group
+
   },
   
   async updateGroupUser(ctx: ParameterizedContext) {
     const req = ctx.request.body as { userPort : number}
-    const groupUserId = ctx.params.groupUserId  as number
-    await GroupUserRepo.update(groupUserId,req)
+    const userId = ctx.params.userId as number
+    const groupId = ctx.params.groupId as number
+    await GroupUserRepo.update({
+      user: {
+        id: userId
+      },
+      group: {
+        id: groupId
+      }
+    },req)
+    ctx.body = await GroupRepo.findOneBy({id: groupId})
   },
 
   async deleteGroupUser(ctx: ParameterizedContext) {

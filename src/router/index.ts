@@ -3,12 +3,10 @@ import koaBody from "koa-body"
 import { koaBodyConfig } from "../util/file"
 import { errorHandler } from "../util/error"
 import { tick, tack } from "../util/tick-tack"
-import { roleFilter } from "../util/auth"
 import UserRouter from "./user"
 import GroupRouter from "./group"
 
 const UserRouterGroup = new Router()
-  .use(roleFilter())
   .get("/users", UserRouter.getUsers)
   .get("/users/:userId", UserRouter.getByUserId)
   .post("/users/:userId/token", UserRouter.createToken)

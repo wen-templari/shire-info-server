@@ -6,6 +6,9 @@ export class Group {
   @PrimaryGeneratedColumn()
   id: number
 
-  @OneToMany(() => GroupUser, groupUser => groupUser.group)
+  @OneToMany(() => GroupUser, groupUser => groupUser.group,{
+    eager: true,
+    cascade: true
+  })
   groupUsers: GroupUser[]
 }

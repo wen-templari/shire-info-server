@@ -1,0 +1,30 @@
+@baseUrl = http://localhost:3011
+@token = {{createToken.response.body.$.token}}
+@userId = 1
+@groupId = 3
+@password = "123456"
+@port= 10086
+
+# @name create
+POST {{baseUrl}}/groups HTTP/1.1
+Content-Type: application/json
+
+[ 
+  { 
+    "userId": 1
+  }
+]
+###
+
+# @name getGroupById
+GET {{baseUrl}}/groups/{{groupId}} HTTP/1.1
+###
+
+# @name updateGroupUser
+PUT {{baseUrl}}/groups/{{groupId}}/users/{{userId}} HTTP/1.1
+Content-Type: application/json
+
+{
+    "userPort": {{port}}
+}
+###

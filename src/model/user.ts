@@ -9,13 +9,19 @@ export class User {
   @Column()
   name: string
 
-  @Column()
+  @Column({
+    nullable: true
+  })
   address?: string
 
-  @Column()
+  @Column({
+    nullable: true
+  })
   port?: number
 
-  @Column()
+  @Column({
+    select: false
+  })
   password: string
 
   @OneToMany(() => GroupUser, groupUser => groupUser.user)
