@@ -48,7 +48,8 @@ const UserRouter = {
   async create(ctx: ParameterizedContext) {
     const req = ctx.request.body as User
     const user = await userRepo.save(req)
-    ctx.body = user
+    const token = genToken(JSON.parse(JSON.stringify(user)))
+    ctx.body = Object.assign(user,{token}) 
   },
 
   async update(ctx: ParameterizedContext) {
