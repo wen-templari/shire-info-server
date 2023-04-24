@@ -1,16 +1,15 @@
-import { CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
-import { GroupUser } from "./group-user"
+import { CreateDateColumn, Entity, ManyToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
+import { User } from "./user"
 
 @Entity()
 export class Group {
   @PrimaryGeneratedColumn()
   id: number
 
-  @OneToMany(() => GroupUser, groupUser => groupUser.group,{
+  @ManyToMany(() => User, user => user.groups, {
     eager: true,
-    cascade: true
   })
-  groupUsers: GroupUser[]
+  users: User[]
 
   @CreateDateColumn()
   createdAt: Date

@@ -15,13 +15,13 @@ export class GroupUser {
   @Column()
   userId:number
 
-  @ManyToOne(() => User, user => user.userGroups,{
-    eager: true
-  })
-  user: User
+  // @ManyToOne(() => User, user => user.userGroups,{
+  //   eager: true
+  // })
+  // user: User
 
-  @ManyToOne(() => Group, group => group.groupUsers)
-  group: Group
+  // @ManyToOne(() => Group, group => group.groupUsers)
+  // group: Group
 
   @CreateDateColumn()
   createdAt: Date

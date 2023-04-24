@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, UpdateDateColumn } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, UpdateDateColumn, ManyToMany, JoinTable } from "typeorm"
 import { GroupUser } from "./group-user"
+import { Group } from "./group"
 
 @Entity()
 export class User {
@@ -10,22 +11,31 @@ export class User {
   name: string
 
   @Column({
-    nullable: true
+    nullable: true,
   })
   address?: string
 
   @Column({
-    nullable: true
+    nullable: true,
   })
   port?: number
 
   @Column({
-    select: false
+    nullable: true,
+  })
+  rpcPort?: number
+
+  @Column({
+    select: false,
   })
   password: string
 
-  @OneToMany(() => GroupUser, groupUser => groupUser.user)
-  userGroups?: GroupUser[]
+  // @OneToMany(() => GroupUser, groupUser => groupUser.user)
+  // userGroups?: GroupUser[]
+
+  @ManyToMany(() => Group, group => group.users)
+  @JoinTable()
+  groups: Group[]
 
   @CreateDateColumn()
   createdAt: Date

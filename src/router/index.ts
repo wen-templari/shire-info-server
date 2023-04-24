@@ -15,8 +15,8 @@ const UserRouterGroup = new Router()
 
 const GroupRouterGroup = new Router()
   .post("/groups", GroupRouter.create)
-  .put("/groups/:groupId/users/:userId", GroupRouter.updateGroupUser)
-  .delete("/groups/:groupId/users/:userId", GroupRouter.deleteGroupUser)
+  // .put("/groups/:groupId/users/:userId", GroupRouter.updateGroupUser)
+  // .delete("/groups/:groupId/users/:userId", GroupRouter.deleteGroupUser)
   .get("/groups/:groupId", GroupRouter.getGroupById)
 
 const router = new Router()

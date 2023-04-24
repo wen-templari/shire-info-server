@@ -13,50 +13,55 @@ const UserRouter = {
 
   async getByUserId(ctx: ParameterizedContext) {
     const id = ctx.params.userId
-    const user = await userRepo.findOneBy({
-      id: id
+    ctx.body = await userRepo.findOne({
+      where: {
+        id: id,
+      },
+      select: {
+        groups: true,
+      },
     })
-    ctx.body = user
   },
 
   async createToken(ctx: ParameterizedContext) {
     const id = ctx.params.userId
     const user = await userRepo.findOneBy({
-      id: id
+      id: id,
     })
     const userPassword = await userRepo.findOneOrFail({
       where: {
-        id: id
+        id: id,
       },
       select: {
-        password: true
-      }
+        password: true,
+      },
     })
     if (!user) {
       ctx.status = 404
       return
-    } 
+    }
     const password = ctx.request.body.password
-    if (password != userPassword.password){
+    if (password != userPassword.password) {
       ctx.status = 401
       return
     }
     const token = genToken(JSON.parse(JSON.stringify(user)))
-    ctx.body = Object.assign(user,{token}) 
+    ctx.body = Object.assign(user, { token })
   },
 
   async create(ctx: ParameterizedContext) {
-    const req = ctx.request.body as User
+    const req = ctx.request.body as Partial<User>
     const user = await userRepo.save(req)
+    user.createdAt = new Date()
     const token = genToken(JSON.parse(JSON.stringify(user)))
-    ctx.body = Object.assign(user,{token}) 
+    ctx.body = Object.assign(user, { token })
   },
 
   async update(ctx: ParameterizedContext) {
     const req = ctx.request.body as Partial<User>
     const userId = ctx.params.userId
     const user = await userRepo.findOneBy({
-      id: userId
+      id: userId,
     })
     if (user) {
       const updatedUser = await userRepo.save({ ...user, ...req })

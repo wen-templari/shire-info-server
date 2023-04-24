@@ -14,7 +14,7 @@ const AppDataSource = new DataSource({
   synchronize: true,
   logging: process.env.NODE_ENV==="development"?false:false,
   entities: [
-    User,Group,GroupUser
+    User,Group
   ],
   migrations: [],
   subscribers: [],

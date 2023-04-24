@@ -1,54 +1,39 @@
 import { ParameterizedContext } from "koa"
 import AppDataSource from "../datatsource"
 import { Group } from "../model/group"
-import { GroupUser } from "../model/group-user"
+import { User } from "../model/user"
 
 const GroupRepo = AppDataSource.getRepository(Group)
-const GroupUserRepo = AppDataSource.getRepository(GroupUser)
+const UserRepo = AppDataSource.getRepository(User)
 
 const GroupRouter = {
   async create(ctx: ParameterizedContext) {
     const req = ctx.request.body as {
-      userId:number
-    }[]
-    const groupUsers = req.map(userId=>{
-      return GroupUserRepo.create(userId)
-    }) 
-    const group = await GroupRepo.save({
-      groupUsers: groupUsers
+      ids: number[]
+    }
+    const group = GroupRepo.create({
+      users: req.ids.map(id => UserRepo.create({ id: id })),
     })
-    ctx.body = group
-
-  },
-  
-  async updateGroupUser(ctx: ParameterizedContext) {
-    const req = ctx.request.body as { userPort : number}
-    const userId = ctx.params.userId as number
-    const groupId = ctx.params.groupId as number
-    await GroupUserRepo.update({
-      user: {
-        id: userId
+    await GroupRepo.save(group)
+    ctx.body = await GroupRepo.findOne({
+      where: {
+        id: group.id,
       },
-      group: {
-        id: groupId
-      }
-    },req)
-    ctx.body = await GroupRepo.findOneBy({id: groupId})
-  },
-
-  async deleteGroupUser(ctx: ParameterizedContext) {
-    // TODO not implemented
+      select: {
+        users: true,
+      },
+    })
   },
 
   async getGroupById(ctx: ParameterizedContext) {
     const id = ctx.params.groupId
     ctx.body = await GroupRepo.findOne({
       where: {
-        id
+        id,
       },
       select: {
-        groupUsers: true
-      }
+        users: true,
+      },
     })
   },
 }
